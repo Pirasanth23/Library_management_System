@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Library Management System - Modern Landing Page</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('assets/Black.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #e6e5e5;
+  }
+  .content-card {
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: #fff;
+  }
+  section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+  }
+  footer {
+    background: rgba(0,0,0,0.85);
+    color: white;
+    text-align: center;
+    padding: 15px;
+  }
+  .feature-card i {
+    font-size: 50px;
+    color: #0d6efd;
+    margin-bottom: 15px;
+  }
+  .contact-card {
+    background: rgba(0,0,0,0.7);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: #fff;
+  }
+  input, textarea {
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: 1px solid #ccc;
+  }
+  input::placeholder, textarea::placeholder { color: #ddd; }
+  .btn-primary { background-color: #0d6efd; border: none; }
+  .btn-primary:hover { background-color: #0b5ed7; }
+  h2, h3, h5 { color: #fff; }
+  .social-icons i { font-size: 24px; margin: 0 10px; color: #0d6efd; }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#welcome"><i class="bi bi-book-half"></i> Library</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#welcome">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#highlight">Why Us?</a></li>
+        <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="#statistics">Stats</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<section id="welcome" class="text-center">
+  <div class="content-card">
+    <h1><i class="bi bi-journal-bookmark"></i> Welcome to Library Management System</h1>
+    <p class="lead">Organize and manage books, members, and transactions efficiently. Our modern system ensures smooth operations and easy reporting.</p>
+    <p>Perfect for schools, small libraries, and internships.</p>
+    <a href="#features" class="btn btn-primary mt-3"><i class="bi bi-arrow-down-circle"></i> Explore Features</a>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <h2 class="text-center mb-4"><i class="bi bi-stars"></i> Key Features</h2>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="content-card feature-card text-center">
+          <i class="bi bi-book-half"></i>
+          <h5>Book Catalog</h5>
+          <p>Organize books by categories, genres, and availability. Quickly search and filter to find any book in seconds.</p>
+          <p>Supports ISBN tracking and automated reminders for overdue books.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card feature-card text-center">
+          <i class="bi bi-people-fill"></i>
+          <h5>Member Management</h5>
+          <p>Track library members efficiently, issue and return books, and maintain member history.</p>
+          <p>Monitor membership status, fines, and active borrowing lists.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card feature-card text-center">
+          <i class="bi bi-check-circle-fill"></i>
+          <h5>Validation & Reports</h5>
+          <p>Data entry is validated to prevent errors, ensuring reliability.</p>
+          <p>Generate reports for books issued, overdue, and daily activity summaries.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="highlight" class="text-center">
+  <div class="container">
+    <h2 class="mb-4"><i class="bi bi-lightning-fill"></i> Why Choose Us?</h2>
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-3">
+        <div class="content-card text-center h-100">
+          <i class="bi bi-phone-fill fs-1 mb-3"></i>
+          <h5>Responsive Design</h5>
+          <p>Our system adapts perfectly to desktops, tablets, and mobile devices.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="content-card text-center h-100">
+          <i class="bi bi-shield-lock-fill fs-1 mb-3"></i>
+          <h5>Secure Data</h5>
+          <p>Validated entries and secure storage keep your library data safe.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="content-card text-center h-100">
+          <i class="bi bi-graph-up-arrow fs-1 mb-3"></i>
+          <h5>Easy Management</h5>
+          <p>Smooth navigation and clean interface make library management effortless.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="content-card text-center h-100">
+          <i class="bi bi-bell-fill fs-1 mb-3"></i>
+          <h5>Automated Notifications</h5>
+          <p>Receive alerts for overdue books, new arrivals, and events automatically.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="testimonials" class="text-center">
+  <div class="container">
+    <h2 class="mb-4"><i class="bi bi-chat-quote"></i> What People Say</h2>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <p>"This library system made managing books so simple. Highly recommend!"</p>
+          <h6>- Alice M.</h6>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <p>"User-friendly interface and great features for small schools."</p>
+          <h6>- John D.</h6>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <p>"The reporting and validation tools are amazing. Saved us so much time."</p>
+          <h6>- Priya S.</h6>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <p>"Library management has never been easier. Great for educational projects."</p>
+          <h6>- Kevin L.</h6>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <p>"Highly efficient and intuitive. A must-have for small libraries."</p>
+          <h6>- Sarah T.</h6>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <p>"Excellent support and continuous updates. Very reliable."</p>
+          <h6>- Michael R.</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="statistics" class="text-center">
+  <div class="container">
+    <h2 class="mb-4"><i class="bi bi-bar-chart-line-fill"></i> Achievements</h2>
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <div class="content-card">
+          <h3>500+</h3>
+          <p>Books Managed</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="content-card">
+          <h3>200+</h3>
+          <p>Active Members</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="content-card">
+          <h3>1000+</h3>
+          <p>Transactions</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="content-card">
+          <h3>99%</h3>
+          <p>Data Accuracy</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="content-card">
+          <h3>50+</h3>
+          <p>Books Issued Today</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="content-card">
+          <h3>10+</h3>
+          <p>New Members This Month</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="content-card">
+          <h3>15</h3>
+          <p>Overdue Books</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="text-center">
+  <div class="container">
+    <h2 class="mb-4"><i class="bi bi-gear-fill"></i> Additional Services</h2>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <i class="bi bi-file-earmark-text-fill fs-1 mb-2"></i>
+          <h5>Reports</h5>
+          <p>Generate detailed reports for books, members, and transactions. Export as PDF or CSV.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <i class="bi bi-person-lines-fill fs-1 mb-2"></i>
+          <h5>User Management</h5>
+          <p>Assign roles, manage user permissions, and monitor activities of librarians and staff.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <i class="bi bi-shield-check fs-1 mb-2"></i>
+          <h5>Security</h5>
+          <p>Secure your library data with role-based access control and validation rules.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <i class="bi bi-calendar-check-fill fs-1 mb-2"></i>
+          <h5>Event Management</h5>
+          <p>Manage library events, workshops, and reading sessions for members.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <i class="bi bi-bell-fill fs-1 mb-2"></i>
+          <h5>Notifications</h5>
+          <p>Send automated alerts for due books, new arrivals, and announcements.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="content-card">
+          <i class="bi bi-cloud-download-fill fs-1 mb-2"></i>
+          <h5>Digital Library</h5>
+          <p>Access digital copies, PDFs, and resources anytime from anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="d-flex justify-content-center">
+  <div class="contact-card">
+    <h3 class="text-center mb-4"><i class="bi bi-envelope"></i> Contact Us</h3>
+    <form onsubmit="return validateContactForm()">
+      <div class="mb-3">
+        <label for="cname" class="form-label">Name</label>
+        <input type="text" id="cname" class="form-control" placeholder="Enter your name">
+      </div>
+      <div class="mb-3">
+        <label for="cemail" class="form-label">Email</label>
+        <input type="email" id="cemail" class="form-control" placeholder="Enter your email">
+      </div>
+      <div class="mb-3">
+        <label for="cmessage" class="form-label">Message</label>
+        <textarea id="cmessage" class="form-control" rows="4" placeholder="Your message"></textarea>
+      </div>
+      <div class="text-center mb-3">
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill"></i> Send Message</button>
+      </div>
+      <p class="text-center mb-1"><i class="bi bi-geo-alt"></i> 123 Library Street, Colombo, Sri Lanka</p>
+      <p class="text-center mb-1"><i class="bi bi-telephone"></i> +94 77 123 4567</p>
+      <p class="text-center social-icons">
+        <i class="bi bi-facebook"></i>
+        <i class="bi bi-twitter"></i>
+        <i class="bi bi-instagram"></i>
+      </p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  Developed by Shanmugam Pirasanth | <i class="bi bi-c-circle"></i> 2025
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function validateContactForm() {
+  const name = document.getElementById('cname').value.trim();
+  const email = document.getElementById('cemail').value.trim();
+  const message = document.getElementById('cmessage').value.trim();
+  if(!name || !email || !message) {
+    alert("Please fill all fields!");
+    return false;
+  }
+  if(!email.includes("@")) {
+    alert("Please enter a valid email!");
+    return false;
+  }
+  alert("Message sent successfully!");
+  return true;
+}
+</script>
+</body>
+</html>
