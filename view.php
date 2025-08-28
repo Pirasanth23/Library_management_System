@@ -58,13 +58,13 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
   </div>
 </nav>
 
-<!-- Table -->
+<!-- Content Card -->
 <div class="container mt-5 pt-5">
-    <div class="content-card mx-auto" style="max-width:1000px;">
+    <div class="content-card mx-auto" style="max-width:1100px;">
         <h2 class="mb-4 text-center"><i class="bi bi-eye-fill"></i> All Contact Entries</h2>
 
         <!-- Search Bar -->
-        <form method="GET" class="mb-3 text-center">
+        <form method="GET" class="mb-4 text-center">
             <div class="input-group" style="max-width:500px; margin:auto;">
                 <input type="text" name="search" class="form-control" placeholder="Search by name, email, or phone" value="<?= htmlspecialchars($search) ?>">
                 <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Search</button>
@@ -72,6 +72,7 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
             </div>
         </form>
 
+        <!-- Table -->
         <div class="table-responsive">
             <table class="table table-bordered text-white">
                 <thead>
@@ -95,7 +96,7 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
                             <td><?= $row['created_at'] ?></td>
                             <td>
                                 <a href="update.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
-                                <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');"><i class="bi bi-trash"></i> Delete</a>
+                                <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this entry?');"><i class="bi bi-trash"></i> Delete</a>
                             </td>
                         </tr>
                         <?php endwhile; ?>
@@ -106,7 +107,7 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
             </table>
         </div>
 
-        <div class="text-center mt-3">
+        <div class="text-center mt-4">
             <a href="insert.php" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i> Insert New Entry</a>
         </div>
     </div>
