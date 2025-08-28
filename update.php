@@ -5,8 +5,13 @@ if(isset($_GET['id'])){
     $id = intval($_GET['id']);
     $sql = "SELECT * FROM contacts WHERE id=$id";
     $result = $conn->query($sql);
+    if($result->num_rows == 0){
+        die("Record not found!");
+    }
     $row = $result->fetch_assoc();
 }
+
+$success = false;
 
 if(isset($_POST['update'])){
     $name = $conn->real_escape_string($_POST['name']);
@@ -14,15 +19,14 @@ if(isset($_POST['update'])){
     $phone = $conn->real_escape_string($_POST['phone']);
 
     if(empty($name) || empty($email) || empty($phone)){
-        die("All fields are required!");
-    }
-
-    $sql = "UPDATE contacts SET name='$name', email='$email', phone='$phone' WHERE id=$id";
-    if($conn->query($sql) === TRUE){
-        header("Location: view.php");
-        exit();
+        $error = "All fields are required!";
     } else {
-        echo "Error updating record: " . $conn->error;
+        $sql = "UPDATE contacts SET name='$name', email='$email', phone='$phone' WHERE id=$id";
+        if($conn->query($sql) === TRUE){
+            $success = true;
+        } else {
+            $error = "Error updating record: " . $conn->error;
+        }
     }
 }
 ?>
@@ -40,6 +44,8 @@ body { background: #1c1c1c; color: #fff; font-family: Arial, sans-serif; }
 .content-card { background: rgba(0,0,0,0.75); padding: 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); max-width:600px; margin:auto; margin-top:80px;}
 .btn-success { background-color: #198754; border:none; }
 .btn-success:hover { background-color: #157347; }
+input:invalid { border-color: red; }
+input:valid { border-color: green; }
 </style>
 </head>
 <body>
@@ -47,18 +53,24 @@ body { background: #1c1c1c; color: #fff; font-family: Arial, sans-serif; }
 <div class="content-card">
 <h2 class="mb-4 text-center"><i class="bi bi-pencil-square"></i> Update Entry</h2>
 
-<form method="POST">
+<?php if($success): ?>
+    <div class="alert alert-success text-center">Entry updated successfully! <a href="view.php" class="text-decoration-underline">Go back</a></div>
+<?php elseif(isset($error)): ?>
+    <div class="alert alert-danger text-center"><?= $error ?></div>
+<?php endif; ?>
+
+<form method="POST" id="updateForm" novalidate>
     <div class="mb-3">
         <label>Name</label>
-        <input type="text" name="name" value="<?= $row['name'] ?>" class="form-control" required>
+        <input type="text" id="name" name="name" value="<?= htmlspecialchars($row['name']) ?>" class="form-control" required oninput="this.value = this.value.toUpperCase()">
     </div>
     <div class="mb-3">
         <label>Email</label>
-        <input type="email" name="email" value="<?= $row['email'] ?>" class="form-control" required>
+        <input type="email" id="email" name="email" value="<?= htmlspecialchars($row['email']) ?>" class="form-control" required>
     </div>
     <div class="mb-3">
         <label>Phone</label>
-        <input type="text" name="phone" value="<?= $row['phone'] ?>" class="form-control" required>
+        <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($row['phone']) ?>" class="form-control" required oninput="this.value=this.value.replace(/[^0-9]/g,'')">
     </div>
     <div class="text-center">
         <button type="submit" name="update" class="btn btn-success"><i class="bi bi-save"></i> Update</button>
@@ -68,5 +80,20 @@ body { background: #1c1c1c; color: #fff; font-family: Arial, sans-serif; }
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Real-time validation
+document.getElementById("name").addEventListener("input", function() {
+    this.style.borderColor = this.value.length < 3 ? "red" : "green";
+});
+document.getElementById("email").addEventListener("input", function() {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    this.style.borderColor = regex.test(this.value) ? "green" : "red";
+});
+document.getElementById("phone").addEventListener("input", function() {
+    this.value = this.value.replace(/[^0-9]/g,'');
+    this.style.borderColor = this.value.length >= 10 ? "green" : "red";
+});
+</script>
+
 </body>
 </html>

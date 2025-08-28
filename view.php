@@ -36,8 +36,8 @@ body { background: #1c1c1c; color: #fff; font-family: Arial, sans-serif; }
 .btn-secondary { background-color: #6c757d; border: none; color: #fff; }
 .btn-secondary:hover { background-color: #5a6268; color: #fff; }
 table { background: rgba(255,255,255,0.05); color: #fff; }
+th, td { vertical-align: middle !important; text-align: center; cursor: pointer; }
 table tbody tr:hover { background: rgba(13, 110, 253, 0.2); }
-th, td { vertical-align: middle !important; text-align: center; }
 footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding: 15px; margin-top: 50px; }
 .navbar-dark .navbar-nav .nav-link { color: #fff; }
 .navbar-dark .navbar-nav .nav-link:hover { color: #0d6efd; }
@@ -63,6 +63,13 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
     <div class="content-card mx-auto" style="max-width:1100px;">
         <h2 class="mb-4 text-center"><i class="bi bi-eye-fill"></i> All Contact Entries</h2>
 
+        <!-- Success Alert -->
+        <?php if(isset($_GET['success'])): ?>
+            <div class="alert alert-success text-center" role="alert">
+                <?= htmlspecialchars($_GET['success']) ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Search Bar -->
         <form method="GET" class="mb-4 text-center">
             <div class="input-group" style="max-width:500px; margin:auto;">
@@ -74,13 +81,13 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
 
         <!-- Table -->
         <div class="table-responsive">
-            <table class="table table-bordered text-white">
+            <table class="table table-bordered text-white" id="entriesTable">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th onclick="sortTable(1)">Name</th>
+                        <th onclick="sortTable(2)">Email</th>
+                        <th onclick="sortTable(3)">Phone</th>
                         <th>Created At</th>
                         <th>Actions</th>
                     </tr>
@@ -96,7 +103,29 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
                             <td><?= $row['created_at'] ?></td>
                             <td>
                                 <a href="update.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
-                                <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this entry?');"><i class="bi bi-trash"></i> Delete</a>
+                                <!-- Delete Button triggers modal -->
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $row['id'] ?>">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="deleteModal<?= $row['id'] ?>" tabindex="-1" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title">Confirm Delete</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        Are you sure you want to delete <b><?= $row['name'] ?></b>?
+                                      </div>
+                                      <div class="modal-footer">
+                                        <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-danger">Yes, Delete</a>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                             </td>
                         </tr>
                         <?php endwhile; ?>
@@ -118,5 +147,31 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Table Sorting -->
+<script>
+function sortTable(n) {
+    let table = document.getElementById("entriesTable");
+    let switching = true;
+    while (switching) {
+        switching = false;
+        let rows = table.rows;
+        for (let i = 1; i < rows.length - 1; i++) {
+            let shouldSwitch = false;
+            let x = rows[i].getElementsByTagName("TD")[n];
+            let y = rows[i + 1].getElementsByTagName("TD")[n];
+            if(x && y && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()){
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if(shouldSwitch){
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+</script>
+
 </body>
 </html>
