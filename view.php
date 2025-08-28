@@ -31,11 +31,13 @@ body { background: #1c1c1c; color: #fff; font-family: Arial, sans-serif; }
 .content-card { background: rgba(0,0,0,0.75); padding: 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 .btn-primary { background-color: #0d6efd; border: none; }
 .btn-primary:hover { background-color: #0b5ed7; }
+.btn-danger { background-color: #dc3545; border: none; }
+.btn-danger:hover { background-color: #b02a37; }
 .btn-secondary { background-color: #6c757d; border: none; color: #fff; }
 .btn-secondary:hover { background-color: #5a6268; color: #fff; }
 table { background: rgba(255,255,255,0.05); color: #fff; }
 table tbody tr:hover { background: rgba(13, 110, 253, 0.2); }
-th, td { vertical-align: middle !important; }
+th, td { vertical-align: middle !important; text-align: center; }
 footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding: 15px; margin-top: 50px; }
 .navbar-dark .navbar-nav .nav-link { color: #fff; }
 .navbar-dark .navbar-nav .nav-link:hover { color: #0d6efd; }
@@ -79,6 +81,7 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Created At</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,10 +93,14 @@ footer { background: rgba(0,0,0,0.85); color: white; text-align: center; padding
                             <td><?= $row['email'] ?></td>
                             <td><?= $row['phone'] ?></td>
                             <td><?= $row['created_at'] ?></td>
+                            <td>
+                                <a href="update.php?id=<?= $row['id'] ?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
+                                <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');"><i class="bi bi-trash"></i> Delete</a>
+                            </td>
                         </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="5" class="text-center">No entries found.</td></tr>
+                        <tr><td colspan="6" class="text-center">No entries found.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>
