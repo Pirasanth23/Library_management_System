@@ -1,3 +1,35 @@
+<?php
+// ------------------------
+// Database connection
+// ------------------------
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "library_db"; // change if needed
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// ------------------------
+// Handle contact form submission
+// ------------------------
+$success = false;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $conn->real_escape_string($_POST['name']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $message = $conn->real_escape_string($_POST['message']);
+
+    $sql = "INSERT INTO contacts (name, email, message) VALUES ('$name', '$email', '$message')";
+    if ($conn->query($sql) === TRUE) {
+        $success = true;
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,6 +97,7 @@
 </head>
 <body>
 
+<!-- 🔹 Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#welcome"><i class="bi bi-book-half"></i> Library</a>
@@ -80,11 +113,11 @@
         <li class="nav-item"><a class="nav-link" href="#statistics">Stats</a></li>
         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="view.php">View Entries</a></li>
       </ul>
     </div>
   </div>
 </nav>
-
 
 <section id="welcome" class="text-center">
   <div class="content-card">
@@ -313,21 +346,28 @@
   </div>
 </section>
 
+<!-- 🔹 Contact Form -->
 <section id="contact" class="d-flex justify-content-center">
   <div class="contact-card">
     <h3 class="text-center mb-4"><i class="bi bi-envelope"></i> Contact Us</h3>
-    <form onsubmit="return validateContactForm()">
+
+    <!-- Success Message -->
+    <?php if($success): ?>
+      <div class="alert alert-success text-center">Message sent successfully!</div>
+    <?php endif; ?>
+
+    <form action="" method="POST" onsubmit="return validateContactForm()">
       <div class="mb-3">
         <label for="cname" class="form-label">Name</label>
-        <input type="text" id="cname" class="form-control" placeholder="Enter your name">
+        <input type="text" name="name" id="cname" class="form-control" placeholder="Enter your name" required>
       </div>
       <div class="mb-3">
         <label for="cemail" class="form-label">Email</label>
-        <input type="email" id="cemail" class="form-control" placeholder="Enter your email">
+        <input type="email" name="email" id="cemail" class="form-control" placeholder="Enter your email" required>
       </div>
       <div class="mb-3">
         <label for="cmessage" class="form-label">Message</label>
-        <textarea id="cmessage" class="form-control" rows="4" placeholder="Your message"></textarea>
+        <textarea name="message" id="cmessage" class="form-control" rows="4" placeholder="Your message" required></textarea>
       </div>
       <div class="text-center mb-3">
         <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill"></i> Send Message</button>
@@ -344,7 +384,7 @@
 </section>
 
 <footer>
-  Developed by Shanmugam Pirasanth | <i class="bi bi-c-circle"></i> 2025
+  Developed by Shanmugam Pirasanth | <i class="bi bi-c-circle"></i> <?php echo date("Y"); ?>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -361,7 +401,6 @@ function validateContactForm() {
     alert("Please enter a valid email!");
     return false;
   }
-  alert("Message sent successfully!");
   return true;
 }
 </script>
